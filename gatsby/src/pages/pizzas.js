@@ -1,6 +1,7 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 import PizzaList from '../components/PizzaList';
+import ToppingsFilters from '../components/ToppingsFilter';
 
 export default function PizzasPage({ data }) {
   // destructuring the props you can go deep like function PizzasPage({ data: { pizzas } }) and call only pizza
@@ -8,8 +9,8 @@ export default function PizzasPage({ data }) {
   const pizzas = data.pizzas.nodes;
   return (
     <>
-      <h1>Pizzas Page</h1>
       <p>Currently we have {pizzas.length} pizzas available</p>
+      <ToppingsFilters />
       <PizzaList pizzas={pizzas} />
     </>
   );
