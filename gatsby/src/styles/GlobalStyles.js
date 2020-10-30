@@ -10,11 +10,14 @@ const GlobalStyles = createGlobalStyle`
     --white: #fff;
     --grey: #efefef;
   }
+
   html {
     background-image: url(${bg});
     background-size: 450px;
     background-attachment: fixed;
     font-size: 10px;
+    max-height: 100vh;
+
   }
 
   body {
@@ -40,6 +43,10 @@ const GlobalStyles = createGlobalStyle`
     &:hover {
       --cast: 4px;
     }
+  }
+
+  .m-bottom-20 {
+    margin-bottom: 20px;
   }
 
   .gatsby-image-wrapper img[src*=base64\\,] {
@@ -80,7 +87,6 @@ const GlobalStyles = createGlobalStyle`
     position: relative;
     display: inline-block;
   }
-
 `;
 
 export default GlobalStyles;
