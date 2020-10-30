@@ -3,14 +3,14 @@ import React from 'react';
 import PizzaList from '../components/PizzaList';
 import ToppingsFilters from '../components/ToppingsFilter';
 
-export default function PizzasPage({ data }) {
+export default function PizzasPage({ data, pageContext }) {
   // destructuring the props you can go deep like function PizzasPage({ data: { pizzas } }) and call only pizza
   // console.log(data.pizzas);
   const pizzas = data.pizzas.nodes;
   return (
     <>
       <p>Currently we have {pizzas.length} pizzas available</p>
-      <ToppingsFilters />
+      <ToppingsFilters activeTopping={pageContext.topping} />
       <PizzaList pizzas={pizzas} />
     </>
   );
@@ -18,9 +18,11 @@ export default function PizzasPage({ data }) {
 
 // the query is exported but not put anywhere inside the component(pizzasPage) Gatsby will recognize the query component under the hood and will run it. Data is available under props.data.
 export const query = graphql`
-  query MyQuery {
+  query PizzaQuery($topping: [String]) {
     # The pizzas: is for renaming the fields
-    pizzas: allSanityPizza {
+    pizzas: allSanityPizza(
+      filter: { toppings: { elemMatch: { name: { in: $topping } } } }
+    ) {
       nodes {
         name
         id
