@@ -1,4 +1,5 @@
 import path from 'path';
+import fetch from 'isomorphic-fetch';
 
 async function turnPizzasIntoPages({ graphql, actions }) {
   // 1. Get a template for this page
@@ -60,6 +61,41 @@ async function turnToppingsIntoPages({ graphql, actions }) {
       },
     });
   });
+}
+
+async function fetchBeersAndTurnIntoNodes({
+  actions,
+  createNodeId,
+  createContentDigest,
+}) {
+  // 1. fetch a list of beersPage
+  // ==> Fetch is a Browser API, not a node api therefore need to use isomorphic fetch
+  const response = await fetch('https://sampleapis.com/beers/api/ale');
+  const beers = await response.json();
+  // 2. loop over each one
+  beers.forEach((beer) => {
+    // 3. create a node for that beer
+    const nodeMeta = {
+      id: createNodeId(`beer-${beer.name}`),
+      parent: null,
+      child: [],
+      internal: {
+        type: 'Beer',
+        mediaType: 'application/json',
+        contentDigest: createContentDigest(beer),
+      },
+    };
+    actions.createNode({ ...beer, ...nodeMeta });
+  });
+}
+
+// Source Beer data from an API into our Gatsby API
+export async function sourceNodes(params) {
+  await Promise.all([fetchBeersAndTurnIntoNodes(params)]);
+  // const baseURL = 'https://sampleapis.com/beers/api/ale';
+  // fetch(baseURL)
+  //   .then((resp) => resp.json())
+  //   .then((data) => console.log(data));
 }
 
 export async function createPages(params) {
