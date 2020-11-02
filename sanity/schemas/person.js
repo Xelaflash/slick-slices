@@ -1,5 +1,7 @@
 import { IoIosPeople as icon } from 'react-icons/io';
 
+// ! In case of change of schema, command needs to be run : sanity graphql deploy
+
 export default {
   // Computer name
   name: 'person',
@@ -23,8 +25,8 @@ export default {
       },
     },
     {
-      name: 'profile',
-      title: 'Profile',
+      name: 'description',
+      title: 'Description',
       type: 'text',
       description: 'Tell us a little bit about yourself',
     },
