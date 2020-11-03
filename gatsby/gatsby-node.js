@@ -105,7 +105,19 @@ async function turnSlicemastersIntoPages({ graphql, actions }) {
       }
     }
   `);
-  // TODO: turn each one into a page
+  // turn each one into a page
+  data.slicemasters.nodes.forEach((slicemaster) => {
+    // console.log('creating a page for', pizza.name);
+    actions.createPage({
+      // specify the URL for the page
+      path: `/slicemaster/${slicemaster.slug.current}`,
+      component: path.resolve('./src/templates/SlicemasterTemplate.js'),
+      // in order to pass data from this createPage method to the actual template you need context
+      context: {
+        slug: slicemaster.slug.current,
+      },
+    });
+  });
   // figure out how many pages there are based on how many slicemasters there are and how many per page!
   // On .env a number is like a string so need to parse it as in Integer here.
   const pageSize = parseInt(process.env.GATSBY_PAGE_SIZE);
