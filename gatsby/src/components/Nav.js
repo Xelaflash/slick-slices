@@ -65,11 +65,14 @@ export default function Nav() {
   return (
     <NavStyles>
       <ul>
-        <li>
+        {/* <li>
           <Link to="/">Home</Link>
-        </li>
+        </li> */}
         <li>
           <Link to="/pizzas">Pizza Menu</Link>
+        </li>
+        <li>
+          <Link to="/slicemasters">SliceMasters</Link>
         </li>
         <li className="logo-item">
           <Link to="/">
@@ -77,7 +80,7 @@ export default function Nav() {
           </Link>
         </li>
         <li>
-          <Link to="/slicemasters">SliceMasters</Link>
+          <Link to="/beers">Beers</Link>
         </li>
         <li>
           <Link to="/order">Order Now</Link>
