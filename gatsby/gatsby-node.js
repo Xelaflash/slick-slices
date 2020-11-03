@@ -89,13 +89,46 @@ async function fetchBeersAndTurnIntoNodes({
   });
 }
 
+async function turnSlicemastersIntoPages({ graphql, actions }) {
+  // query all slicemasters
+  const { data } = await graphql(`
+    query {
+      slicemasters: allSanityPerson {
+        totalCount
+        nodes {
+          id
+          name
+          slug {
+            current
+          }
+        }
+      }
+    }
+  `);
+  // TODO: turn each one into a page
+  // figure out how many pages there are based on how many slicemasters there are and how many per page!
+  // On .env a number is like a string so need to parse it as in Integer here.
+  const pageSize = parseInt(process.env.GATSBY_PAGE_SIZE);
+  const pageCount = Math.ceil(data.slicemasters.totalCount / pageSize);
+  //  Loop from 1 to n and create the pages for them
+  Array.from({ length: pageCount }).forEach((_, index) => {
+    console.log(`creating page n: ${index + 1}`);
+    actions.createPage({
+      // specify the URL for the page
+      path: `/slicemasters/${index + 1}`,
+      component: path.resolve('./src/pages/slicemasters.js'),
+      // in order to pass data from this createPage method to the actual page you need context
+      context: {
+        skip: index * pageSize,
+        currentPage: index + 1,
+      },
+    });
+  });
+}
+
 // Source Beer data from an API into our Gatsby API
 export async function sourceNodes(params) {
   await Promise.all([fetchBeersAndTurnIntoNodes(params)]);
-  // const baseURL = 'https://sampleapis.com/beers/api/ale';
-  // fetch(baseURL)
-  //   .then((resp) => resp.json())
-  //   .then((data) => console.log(data));
 }
 
 export async function createPages(params) {
@@ -103,10 +136,10 @@ export async function createPages(params) {
   // wait for all promises to be resolved before finishing them all
   await Promise.all([
     // pizzas
-    // toppings
     turnPizzasIntoPages(params),
+    // toppings
     turnToppingsIntoPages(params),
+    // sclimemasters
+    turnSlicemastersIntoPages(params),
   ]);
-
-  // sclimemasters
 }
