@@ -8,6 +8,7 @@ import Footer from './Footer';
 import GlobalStyles from '../styles/GlobalStyles';
 import Fonts from '../styles/Fonts';
 import stripes from '../assets/images/stripes.svg';
+// import SEO from './SEO';
 
 const SiteBorderStyles = styled.div`
   max-width: 1000px;
@@ -33,6 +34,7 @@ const ContentStyles = styled.div`
 export default function Layout({ children }) {
   return (
     <>
+      {/* <SEO /> */}
       <GlobalStyles />
       <Fonts />
       <SiteBorderStyles>

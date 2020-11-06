@@ -1,5 +1,11 @@
 import React from 'react';
+import SEO from '../components/SEO';
 
 export default function OrderPage() {
-  return <h1>Order Page</h1>;
+  return (
+    <>
+      <SEO title="Order a pizza" />
+      <h1>Order Page</h1>
+    </>
+  );
 }

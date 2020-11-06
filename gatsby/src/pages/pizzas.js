@@ -1,6 +1,7 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 import PizzaList from '../components/PizzaList';
+import SEO from '../components/SEO';
 import ToppingsFilters from '../components/ToppingsFilter';
 
 export default function PizzasPage({ data, pageContext }) {
@@ -9,6 +10,13 @@ export default function PizzasPage({ data, pageContext }) {
   const pizzas = data.pizzas.nodes;
   return (
     <>
+      <SEO
+        title={
+          pageContext.topping
+            ? `Pizzas with ${pageContext.topping}`
+            : 'All pizzas'
+        }
+      />
       <p>Currently we have {pizzas.length} pizzas available</p>
       <ToppingsFilters activeTopping={pageContext.topping} />
       <PizzaList pizzas={pizzas} />

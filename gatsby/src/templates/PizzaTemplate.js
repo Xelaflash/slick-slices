@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import styled from 'styled-components';
+import SEO from '../components/SEO';
 
 const PizzaPageStyle = styled.div`
   display: grid;
@@ -17,17 +18,21 @@ export default function SinglePizzaPage({ data: { pizza } }) {
   // const { pizza } = data; ==> No need for this because we are destructuring 2 level deep
   // console.log(pizza);
   return (
-    <PizzaPageStyle>
-      <Img fluid={pizza.image.asset.fluid} alt={pizza.name} />
-      <div className="centered">
-        <h2 className="mark">{pizza.name}</h2>
-        <ul>
-          {pizza.toppings.map((topping) => (
-            <li key={topping.id}>{topping.name}</li>
-          ))}
-        </ul>
-      </div>
-    </PizzaPageStyle>
+    <>
+      {/* ? checks if its exists in case image src is not available */}
+      <SEO title={pizza.name} image={pizza.image?.asset?.fluid?.src} />
+      <PizzaPageStyle>
+        <Img fluid={pizza.image.asset.fluid} alt={pizza.name} />
+        <div className="centered">
+          <h2 className="mark">{pizza.name}</h2>
+          <ul>
+            {pizza.toppings.map((topping) => (
+              <li key={topping.id}>{topping.name}</li>
+            ))}
+          </ul>
+        </div>
+      </PizzaPageStyle>
+    </>
   );
 }
 
