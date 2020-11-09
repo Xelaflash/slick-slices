@@ -44,6 +44,7 @@ export default function SlicemastersPage({ data, pageContext }) {
     <>
       <SEO title={`Slicmasters - Page ${pageContext.currentPage || 1} `} />
       <Pagination
+        key={pageContext.currentPage}
         pageSize={parseInt(process.env.GATSBY_PAGE_SIZE)}
         currentPage={pageContext.currentPage || 1}
         skip={pageContext.skip}

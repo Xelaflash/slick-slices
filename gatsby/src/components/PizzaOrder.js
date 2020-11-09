@@ -9,12 +9,11 @@ export default function PizzaOrder({ order, pizzas, removeFromOrder }) {
     <>
       <p>You have {order.length} items in your order!</p>
       {order.map((singleOrder, index) => {
-        console.log(singleOrder);
         const pizza = pizzas.find(
           (orderedPizza) => orderedPizza.id === singleOrder.id
         );
         return (
-          <MenuItemsStyles key={singleOrder.id}>
+          <MenuItemsStyles key={`${singleOrder.id}-${index}`}>
             <Img fluid={pizza.image.asset.fluid} alt={pizza.name} />
             <h2>
               {pizza.name} ({singleOrder.size})
