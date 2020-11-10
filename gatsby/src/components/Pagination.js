@@ -43,6 +43,7 @@ export default function pagination({
       </Link>
       {Array.from({ length: totalPages }).map((_, index) => (
         <Link
+          key={index}
           className={currentPage === 1 && index === 0 ? 'current' : ''}
           to={`${base}/${index > 0 ? index + 1 : ''}`}
         >
