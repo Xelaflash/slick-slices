@@ -24,28 +24,18 @@ function generateOrderEmail({ order, total }) {
 }
 
 // create a transport for nodemailer
-// TODO Debug with env var
-// const transporter = nodemailer.createTransport({
-//   host: process.env.MAIL_HOST,
-//   port: 587,
-//   auth: {
-//     user: process.env.MAIL_USER,
-//     pass: process.env.MAIL_PASS,
-//   },
-// });
-// const transporter = nodemailer.createTransport({
-//   host: 'smtp.ethereal.email',
-//   port: 587,
-//   auth: {
-//     user: 'mortimer.dicki74@ethereal.email',
-//     pass: '866ntqmZSaNbkjKkNT',
-//   },
-// });
+const transporter = nodemailer.createTransport({
+  host: process.env.MAIL_HOST,
+  port: 587,
+  auth: {
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASS,
+  },
+});
 
 exports.handler = async (event, context) => {
-  console.log(process.env.MAIL_HOST);
   const body = JSON.parse(event.body);
-  console.log(body);
+  // console.log(body);
   // Validate the data coming in is correct
   const requiredFields = ['email', 'name', 'order'];
 
@@ -62,14 +52,14 @@ exports.handler = async (event, context) => {
   }
 
   // make sure they actually have items in that order
-  // if (!body.order.length) {
-  //   return {
-  //     statusCode: 400,
-  //     body: JSON.stringify({
-  //       message: `Why would you order nothing?!`,
-  //     }),
-  //   };
-  // }
+  if (!body.order.length) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({
+        message: `Why would you order nothing?!`,
+      }),
+    };
+  }
 
   // send the email
   const info = await transporter.sendMail({

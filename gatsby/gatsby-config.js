@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 // specify where to find the .env file
 dotenv.config({ path: '.env' });
 // ! To check if .env works but dangerous!! TO ERASE for real apps
-// console.log(process.env.SANITY_TOKEN);
+// console.log(process.env.xxx);
 
 export default {
   siteMetadata: {
