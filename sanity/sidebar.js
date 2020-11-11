@@ -10,7 +10,7 @@ export default function sidebar() {
       S.listItem().title('Home page').icon(icon).child(
         S.editor()
           .schemaType('storeSettings')
-          // Make a new doc id so we don't have a random string of caractersz
+          // Make a new doc id so we don't have a random string of characters
           .documentId('downtownStore')
       ),
       // add in the rest of our document items
