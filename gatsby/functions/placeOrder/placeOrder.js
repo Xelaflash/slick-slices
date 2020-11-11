@@ -33,8 +33,23 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// function wait(ms) {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(resolve, ms);
+//   });
+// }
+
 exports.handler = async (event, context) => {
   const body = JSON.parse(event.body);
+  // check if honeypot field is filled up
+  if (body.piegeacon) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({
+        message: 'boop beep bop... Goodbye! ERR: %%%455000$$@@',
+      }),
+    };
+  }
   // console.log(body);
   // Validate the data coming in is correct
   const requiredFields = ['email', 'name', 'order'];
@@ -56,7 +71,7 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 400,
       body: JSON.stringify({
-        message: `Why would you order nothing?!`,
+        message: `Order empty...Why would you order nothing 😵?!`,
       }),
     };
   }

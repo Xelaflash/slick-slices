@@ -17,6 +17,7 @@ export default function OrderPage({ data }) {
     // need to explicitly specify the default values of your fields
     name: '',
     email: '',
+    piegeacon: '',
   });
 
   const {
@@ -40,7 +41,7 @@ export default function OrderPage({ data }) {
     <>
       <SEO title="Order a pizza" />
       <OrderStyles onSubmit={submitOrder}>
-        <fieldset>
+        <fieldset disabled={loading}>
           <legend>Your Info</legend>
           {/* eslint will complain if you don't have input with an ID nested in label tag */}
           <label htmlFor="name">
@@ -57,15 +58,22 @@ export default function OrderPage({ data }) {
           <label htmlFor="email">
             Email
             <input
-              type="text"
+              type="email"
               name="email"
               id="email"
               value={values.email}
               onChange={updateValue}
             />
           </label>
+          <input
+            type="piegeacon"
+            name="piegeacon"
+            id="piegeacon"
+            value={values.piegeacon}
+            onChange={updateValue}
+          />
         </fieldset>
-        <fieldset className="menu">
+        <fieldset className="menu" disabled={loading}>
           <legend>Menu</legend>
           {pizzas.map((pizza) => (
             <MenuItemStyles key={pizza.id}>
@@ -97,7 +105,7 @@ export default function OrderPage({ data }) {
             </MenuItemStyles>
           ))}
         </fieldset>
-        <fieldset className="order">
+        <fieldset className="order" disabled={loading}>
           <legend>Order</legend>
           <PizzaOrder
             order={order}
@@ -105,7 +113,7 @@ export default function OrderPage({ data }) {
             pizzas={pizzas}
           />
         </fieldset>
-        <fieldset>
+        <fieldset disabled={loading}>
           <h3>
             Your Total is {formatMoney(calculateOrderTotal(order, pizzas))}
           </h3>

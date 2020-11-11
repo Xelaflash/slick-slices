@@ -40,6 +40,7 @@ export default function usePizza({ pizzas, values }) {
       total: formatMoney(calculateOrderTotal(order, pizzas)),
       name: values.name,
       email: values.email,
+      piegeacon: values.piegeacon,
     };
     // 4. send this data to a serverless function when order is checked out
     const res = await fetch(
