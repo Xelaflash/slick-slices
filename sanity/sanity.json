@@ -14,6 +14,7 @@
     "@sanity/default-login",
     "@sanity/desk-tool",
     "@sanity/google-maps-input"
+
   ],
   "env": {
     "development": {
@@ -26,6 +27,10 @@
     {
       "name": "part:@sanity/base/schema",
       "path": "./schemas/schema"
+    },
+    {
+      "name":  "part:@sanity/desk-tool/structure",
+      "path": "./sidebar.js"
     }
   ]
 }
