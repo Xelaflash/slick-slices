@@ -8,7 +8,7 @@ const NavStyles = styled.nav`
     transform: translateY(-25%);
   }
   /* background: var(--yellow); */
-  margin-bottom: 3rem;
+  /* margin-bottom: 3rem; */
   padding: 5px 0;
   ul {
     margin: 0;

@@ -14,17 +14,35 @@ export default function useLatestData() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         query: `
-        query {
-          StoreSettings(id:"downtownStore") {
-            name
-            slicemaster {
+          query {
+            StoreSettings(id: "downtownStore") {
               name
-            }
-            hotSlices {
-              name
+              slicemaster {
+                name
+                _id
+                image {
+                  asset {
+                    url
+                    metadata {
+                      lqip
+                    }
+                  }
+                }
+              }
+              hotSlices {
+                name
+                _id
+                image {
+                  asset {
+                    url
+                    metadata {
+                      lqip
+                    }
+                  }
+                }
+              }
             }
           }
-        }
         `,
       }),
     })
@@ -34,6 +52,9 @@ export default function useLatestData() {
         // set the data to state
         setHotSlices(response.data.StoreSettings.hotSlices);
         setSlicemasters(response.data.StoreSettings.slicemaster);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }, []);
   return {
