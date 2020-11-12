@@ -7,8 +7,7 @@ import SEO from '../components/SEO';
 const PizzaPageStyle = styled.div`
   display: grid;
   gap: 2rem;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  margin: 0px 50px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   .centered {
     margin: 0 auto;
   }
