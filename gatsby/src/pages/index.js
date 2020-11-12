@@ -25,7 +25,7 @@ export default function HomePage() {
     <>
       <SEO title="Home" />
       <div className="center">
-        <h1>The best pizza downton!</h1>
+        <h1>The best pizza downtown!</h1>
         <p>Open from 11am to 11pm every day</p>
         <div>
           <CurrentlySlicing slicemasters={slicemasters} />
