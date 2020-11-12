@@ -4,7 +4,7 @@ App made with Gatsby in October 2020
 
 Headless CMS for content editing : Sanity.io
 
-URL: [Slick's Slices](thirsty-mcclintock-8946d4.netlify.app)
+URL: [Slick's Slices](www.thirsty-mcclintock-8946d4.netlify.app)
 
 ## Stack
 
