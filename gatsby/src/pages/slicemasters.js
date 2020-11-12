@@ -40,9 +40,10 @@ const PersonStyle = styled.div`
 
 export default function SlicemastersPage({ data, pageContext }) {
   const slicemastersNode = data.slicemasters.nodes;
+  console.log(pageContext.currentPage);
   return (
     <>
-      <SEO title={`Slicmasters - Page ${pageContext.currentPage || 1} `} />
+      <SEO title={`Slicemasters - Page ${pageContext.currentPage || 1} `} />
       <Pagination
         key={pageContext.currentPage}
         pageSize={parseInt(process.env.GATSBY_PAGE_SIZE)}
