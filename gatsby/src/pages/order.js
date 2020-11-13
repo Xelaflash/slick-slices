@@ -1,6 +1,9 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 import Img from 'gatsby-image';
+// import FlashMessage from 'react-flash-message';
+import Alert from '@material-ui/lab/Alert';
+import Fade from '@material-ui/core/Fade';
 import SEO from '../components/SEO';
 import useForm from '../utils/useForm';
 import calculatePizzaPrice from '../utils/calculatePizzaPrice';
@@ -10,6 +13,20 @@ import MenuItemStyles from '../styles/MenuItemStyles';
 import usePizza from '../utils/usePizza';
 import PizzaOrder from '../components/PizzaOrder';
 import calculateOrderTotal from '../utils/calculateOrderTotal';
+
+const styles = {
+  alert: {
+    left: '0',
+    pointerEvents: 'none',
+    position: 'fixed',
+    top: 0,
+    background: 'green',
+    color: 'white',
+    fontSize: '1.8rem',
+    width: '100%',
+    zIndex: '1500',
+  },
+};
 
 export default function OrderPage({ data }) {
   const pizzas = data.pizzas.nodes;
@@ -28,18 +45,34 @@ export default function OrderPage({ data }) {
     loading,
     message,
     submitOrder,
+    flash,
   } = usePizza({
     pizzas,
     values,
   });
 
   if (message) {
-    return <p>{message}</p>;
+    return (
+      <>
+        <p>{message}</p>
+        <div>
+          {flash ? (
+            <Fade in={flash} timeout={{ enter: 500, exit: 3000 }}>
+              <Alert style={styles.alert} severity="success">
+                This is a success message! It could be an info, warning, or
+                error too!
+              </Alert>
+            </Fade>
+          ) : null}
+        </div>
+      </>
+    );
   }
 
   return (
     <>
       <SEO title="Order a pizza" />
+
       <OrderStyles onSubmit={submitOrder}>
         <fieldset disabled={loading}>
           <legend>Your Info</legend>

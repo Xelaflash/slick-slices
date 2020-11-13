@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { navigate } from 'gatsby';
 import OrderContext from '../components/OrderContext';
 import attachNamesAndPrices from './attachNamesAndPrices';
 import calculateOrderTotal from './calculateOrderTotal';
@@ -13,6 +14,7 @@ export default function usePizza({ pizzas, values }) {
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const [flash, setFlash] = useState(null);
 
   // 2. make a function to add things to order
   function addToOrder(orderedPizza) {
@@ -27,7 +29,6 @@ export default function usePizza({ pizzas, values }) {
       ...order.slice(index + 1),
     ]);
   }
-
   async function submitOrder(e) {
     e.preventDefault();
     setLoading(true);
@@ -61,6 +62,13 @@ export default function usePizza({ pizzas, values }) {
     } else {
       setLoading(false);
       setMessage('Order successfully placed!!');
+      setFlash(true);
+      setTimeout(() => {
+        setFlash(false);
+      }, 3000);
+      setTimeout(() => {
+        navigate('/', { replace: true });
+      }, 5000);
     }
   }
 
@@ -71,6 +79,7 @@ export default function usePizza({ pizzas, values }) {
     error,
     loading,
     message,
+    flash,
     submitOrder,
   };
 }
