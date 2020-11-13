@@ -121,7 +121,7 @@ export default function OrderPage({ data }) {
               <div>
                 <h2>{pizza.name}</h2>
               </div>
-              <div>
+              <div className="order-sizeButtons-wrapper">
                 {['Small', 'Medium', 'Large'].map((size) => (
                   <button
                     type="button"

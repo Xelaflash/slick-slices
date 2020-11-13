@@ -6,10 +6,10 @@ import styled from 'styled-components';
 
 const PizzaGridStyles = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 4rem;
   /* grid generate auto rows for title toppings pic but it's not aligned we need to align the rows of the single pizza  on the grandparent ( pizzas list) */
-  grid-auto-rows: auto auto 500px;
+  grid-auto-rows: auto auto 300px;
 `;
 
 const PizzasStyles = styled.div`
@@ -17,7 +17,7 @@ const PizzasStyles = styled.div`
   /* Take your row sizing not from the PizzasStyles div but from PizzaGridStyles grid*/
   /* below properties says if browser does not support whats inside parentesis then run the other propertie. */
   @supports not (grid-template-rows: subgrid) {
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows: minmax(40px, 60px) minmax(40px, 50px) 1fr;
   }
   /*  ⚠️ Chrome does not support subgrid */
   grid-template-rows: subgrid;
