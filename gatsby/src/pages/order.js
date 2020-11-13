@@ -54,13 +54,15 @@ export default function OrderPage({ data }) {
   if (message) {
     return (
       <>
-        <p>{message}</p>
+        <div>
+          <h3 className="center">{message}</h3>
+        </div>
+        <p>You will be redirected to Homepage after few seconds.</p>
         <div>
           {flash ? (
             <Fade in={flash} timeout={{ enter: 500, exit: 3000 }}>
               <Alert style={styles.alert} severity="success">
-                This is a success message! It could be an info, warning, or
-                error too!
+                Order successfully placed! Please check your inbox.
               </Alert>
             </Fade>
           ) : null}

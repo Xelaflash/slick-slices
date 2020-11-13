@@ -68,7 +68,7 @@ export default function usePizza({ pizzas, values }) {
       }, 3000);
       setTimeout(() => {
         navigate('/', { replace: true });
-      }, 5000);
+      }, 6000);
     }
   }
 
